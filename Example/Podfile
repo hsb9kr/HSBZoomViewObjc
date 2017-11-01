@@ -1,0 +1,6 @@
+use_frameworks!
+target 'HSBZoomViewObjc_Tests' do
+  pod 'HSBZoomViewObjc', :path => '../'
+  
+  
+end
