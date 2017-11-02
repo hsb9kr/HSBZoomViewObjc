@@ -12,7 +12,6 @@
 
 @interface HSBZoomView : UIView {
 @private
-    BOOL _isZooming;
     UIScrollView *_scrollView;
     
     struct {
@@ -29,7 +28,8 @@
 @property (weak, nonatomic) id<HSBZoomViewDelegate> delegate;
 @property (strong, nonatomic, readonly) UIScrollView *scrollView;
 @property (strong, nonatomic) UIView *view;
-@property (nonatomic, readonly) BOOL isZooming;
+@property (nonatomic) IBInspectable CGFloat minimumZoomScale;
+@property (nonatomic) IBInspectable CGFloat maximumZoomScale;
 
 - (void)reload;
 

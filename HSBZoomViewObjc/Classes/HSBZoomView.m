@@ -13,7 +13,6 @@
 
 @implementation HSBZoomView
 @dynamic scrollView;
-@dynamic isZooming;
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -33,16 +32,12 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if (_isZooming) return;
+    if (_scrollView.zooming) return;
     [self reload];
 }
 
 - (UIScrollView *)scrollView {
     return _scrollView;
-}
-
-- (BOOL)isZooming {
-    return _isZooming;
 }
 
 - (void)setDataSource:(id<HSBZoomViewDataSource>)dataSource {
@@ -54,6 +49,22 @@
     _delegate = delegate;
     _delegateFlags.willBeginZoomingFlag = [_delegate respondsToSelector:@selector(hsbZoomViewWillBeginZooming:)];
     _delegateFlags.DidEndZoomingFlag = [_delegate respondsToSelector:@selector(hsbZoomViewDidEndZooming:)];
+}
+
+- (void)setMinimumZoomScale:(CGFloat)minimumZoomScale {
+    _scrollView.minimumZoomScale = minimumZoomScale;
+}
+
+- (CGFloat)minimumZoomScale {
+    return _scrollView.minimumZoomScale;
+}
+
+- (void)setMaximumZoomScale:(CGFloat)maximumZoomScale {
+    _scrollView.maximumZoomScale = maximumZoomScale;
+}
+
+- (CGFloat)maximumZoomScale {
+    return _scrollView.maximumZoomScale;
 }
 
 #pragma mark - Private
@@ -94,14 +105,12 @@
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {
     if (_delegateFlags.willBeginZoomingFlag) [_delegate hsbZoomViewWillBeginZooming:self];
     _scrollView.layer.masksToBounds = NO;
-    _isZooming = YES;
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
     [UIView animateWithDuration:0.1 animations:^{
         _scrollView.zoomScale = 1;
     } completion:^(BOOL finished) {
-        _isZooming = NO;
         _scrollView.layer.masksToBounds = NO;
         if (_delegateFlags.DidEndZoomingFlag) [_delegate hsbZoomViewDidEndZooming:self];
     }];
