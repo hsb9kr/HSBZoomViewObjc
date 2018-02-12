@@ -108,11 +108,14 @@
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
+	
+	__block struct DelegateFlags flags = _delegateFlags;
+	
     [UIView animateWithDuration:0.1 animations:^{
-		if (_autoZoom) _scrollView.zoomScale = 1;
+		if (self.autoZoom) self.scrollView.zoomScale = 1;
     } completion:^(BOOL finished) {
-        _scrollView.layer.masksToBounds = NO;
-        if (_delegateFlags.DidEndZoomingFlag) [_delegate hsbZoomViewDidEndZooming:self];
+        self.scrollView.layer.masksToBounds = NO;
+        if (flags.DidEndZoomingFlag) [self.delegate hsbZoomViewDidEndZooming:self];
     }];
 }
 

@@ -14,11 +14,11 @@
 @private
     UIScrollView *_scrollView;
     
-    struct {
+    struct DataSourceFlags {
         unsigned int viewFlag :1;
     }_dataSourceFlags;
     
-    struct {
+    struct DelegateFlags {
         unsigned int willBeginZoomingFlag   :1;
         unsigned int DidEndZoomingFlag      :1;
     }_delegateFlags;
