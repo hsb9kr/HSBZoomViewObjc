@@ -24,10 +24,11 @@
     }_delegateFlags;
 }
 
-@property (weak, nonatomic) id<HSBZoomViewDataSource> dataSource;
-@property (weak, nonatomic) id<HSBZoomViewDelegate> delegate;
+@property (weak, nonatomic) IBOutlet id<HSBZoomViewDataSource> dataSource;
+@property (weak, nonatomic) IBOutlet id<HSBZoomViewDelegate> delegate;
 @property (strong, nonatomic, readonly) UIScrollView *scrollView;
 @property (strong, nonatomic) UIView *view;
+@property (nonatomic) IBInspectable BOOL autoZoom;
 @property (nonatomic) IBInspectable CGFloat minimumZoomScale;
 @property (nonatomic) IBInspectable CGFloat maximumZoomScale;
 

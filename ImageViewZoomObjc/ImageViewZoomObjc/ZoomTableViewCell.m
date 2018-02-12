@@ -40,7 +40,7 @@
 }
 
 - (void)hsbZoomViewDidEndZooming:(HSBZoomView *)view {
-    [view reload];
+//    [view reload];
 }
 
 

@@ -109,7 +109,7 @@
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
     [UIView animateWithDuration:0.1 animations:^{
-        _scrollView.zoomScale = 1;
+		if (_autoZoom) _scrollView.zoomScale = 1;
     } completion:^(BOOL finished) {
         _scrollView.layer.masksToBounds = NO;
         if (_delegateFlags.DidEndZoomingFlag) [_delegate hsbZoomViewDidEndZooming:self];
